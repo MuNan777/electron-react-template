@@ -40,10 +40,11 @@ const ipcMainHandle: { [key: string]: () => unknown } = {
   dll: () => {
     ipcMain.handle('some-invoke1', async (event, args) => {
       return new Promise((resolve, reject) => {
+        console.log(path.join(__dirname, 'ele/dll', 'Some.dll'), 6666666666666666666666666666666)
         const invoke1 = edge.func({
           assemblyFile: path.join(__dirname, 'ele/dll', 'Some.dll'),
           typeName: "Some.Startup",
-          methodName: "Invoke"
+          methodName: "Invoke1"
         })
         invoke1("Call .net method from DLL", function (err: any, result: any) {
           if (err) reject(err);

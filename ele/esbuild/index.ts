@@ -12,7 +12,7 @@ const createOptions = (): BuildOptions => ({
   },
   treeShaking: true,
   minify: true,
-  external: ['electron'],
+  external: ['electron', 'electron-edge-js'],
   format: 'cjs',
   loader: { '.ts': 'ts' },
   outdir: ROOT,
