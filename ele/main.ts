@@ -5,6 +5,7 @@ import { AppWindow } from './common'
 import electronReload from 'electron-reloader'
 import { loadIpcMainHandle, setWindowMap } from './ipc/ipcMainHandle'
 import Store from 'electron-store'
+import { initAutoUpdater } from './common/autoUpdaterConf'
 
 const urlLocation = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, './build/index.html')}`
 
@@ -24,6 +25,8 @@ const createWindow = () => {
   loadIpcMainHandle()
 
   Store.initRenderer()
+
+  initAutoUpdater(mainWindow)
 
   const testStore = new Store<Record<string, { [key: string]: unknown }>>({ name: 'test' })
   testStore.set('abc', { test: 123 })

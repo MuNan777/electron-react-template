@@ -41,7 +41,7 @@ const ipcMainHandle: { [key: string]: () => unknown } = {
     ipcMain.handle('start-up-invoke', async (event, args) => {
       return new Promise((resolve, reject) => {
         const invoke = edge.func({
-          assemblyFile: path.join(__dirname, 'resources', 'Test.dll'),
+          assemblyFile: path.join('resources/extraResources', 'Test.dll'),
           typeName: "Test.StartUp",
           methodName: "Invoke"
         })

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "main": "main.js",
+  "author": "Test",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -10,7 +11,6 @@
     "@types/jest": "^27.5.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "electron": "22.0.0",
     "electron-edge-js": "^22.0.1",
     "electron-is-dev": "^2.0.0",
     "electron-store": "^8.1.0",
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build:react": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "watch:cp": "webpack -w",
@@ -29,7 +29,9 @@
     "watch:ele": "nodemon ele/esbuild/index.ts --watch \"./ele\"",
     "build:ele": "ts-node ele/esbuild/index.ts",
     "dev": "concurrently \"npm run watch:ele\" \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm run start\"",
-    "dist": "electron-builder"
+    "build": "npm run build:react && npm run build:cp && npm run build:ele && electron-builder",
+    "release": "node release-config/index.js electron-builder",
+    "prerelease": "npm run build:react && npm run build:ele && npm run build:cp"
   },
   "eslintConfig": {
     "extends": [
@@ -52,7 +54,7 @@
   "homepage": "./",
   "build": {
     "appId": "myTestDemo",
-    "productName": "测试文档",
+    "productName": "测试",
     "copyright": "Copyright © 2023 ${author}",
     "files": [
       "main.js",
@@ -60,12 +62,15 @@
       "build/**/*",
       "node_modules/**/*",
       "children-pages-build/**/*",
-      "resource",
       "package.json"
     ],
     "publish": [
       "github"
     ],
+    "extraResources": {
+      "from": "./resources/extraResources/",
+      "to": "extraResources"
+    },
     "directories": {
       "buildResources": "assets"
     },
@@ -93,13 +98,17 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
+    "css-loader": "^6.7.3",
     "customize-cra": "^1.0.0",
+    "electron": "22.0.0",
     "electron-builder": "^23.6.0",
     "electron-reloader": "^1.2.3",
+    "electron-updater": "^5.3.0",
     "esbuild": "^0.17.10",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "nodemon": "^2.0.20",
     "react-app-rewired": "^2.2.1",
+    "style-loader": "^3.3.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5",
     "wait-on": "^7.0.1",
