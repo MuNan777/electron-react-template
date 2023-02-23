@@ -28,7 +28,8 @@
     "build:cp": "webpack",
     "watch:ele": "nodemon ele/esbuild/index.ts --watch \"./ele\"",
     "build:ele": "ts-node ele/esbuild/index.ts",
-    "dev": "concurrently \"npm run watch:ele\" \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm run start\""
+    "dev": "concurrently \"npm run watch:ele\" \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm run start\"",
+    "dist": "electron-builder"
   },
   "eslintConfig": {
     "extends": [
@@ -48,11 +49,52 @@
       "last 1 safari version"
     ]
   },
+  "homepage": "./",
+  "build": {
+    "appId": "myTestDemo",
+    "productName": "测试文档",
+    "copyright": "Copyright © 2023 ${author}",
+    "files": [
+      "main.js",
+      "preload.js",
+      "build/**/*",
+      "node_modules/**/*",
+      "children-pages-build/**/*",
+      "resource",
+      "package.json"
+    ],
+    "publish": [
+      "github"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "extends": null,
+    "win": {
+      "target": [
+        "msi",
+        "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-Web-Setup-${version}.${ext}",
+      "verifyUpdateCodeSignature": false,
+      "publisherName": [
+        "Test"
+      ]
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": false
+    }
+  },
   "devDependencies": {
     "@types/node": "^16.18.12",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
+    "electron-builder": "^23.6.0",
     "electron-reloader": "^1.2.3",
     "esbuild": "^0.17.10",
     "node-polyfill-webpack-plugin": "^2.0.1",

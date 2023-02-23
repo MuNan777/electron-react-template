@@ -34,6 +34,6 @@ export const readFile = (path: string) => {
   return ipcRenderer.invoke('read-file', path)
 }
 
-export const someInvoke1 = () => {
-  return ipcRenderer.invoke('some-invoke1')
+export const startUpInvoke = () => {
+  return ipcRenderer.invoke('start-up-invoke')
 }

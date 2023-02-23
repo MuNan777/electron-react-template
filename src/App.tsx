@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { someInvoke1 } from './ipc/ipcRenderer';
+import { startUpInvoke } from './ipc/ipcRenderer';
 
 
 function App () {
 
-  someInvoke1().then((data) => {
-    console.log(data)
+  const [text, setText] = useState('')
+
+  startUpInvoke().then((data) => {
+    setText(data)
   })
 
   return (
     <div className="App">
-      <div>123</div>
+      {text}
     </div>
   );
 }
