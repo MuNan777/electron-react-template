@@ -1,7 +1,7 @@
 {
   "name": "electron-react-template",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "private": false,
   "main": "main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
